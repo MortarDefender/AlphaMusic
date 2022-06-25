@@ -1,7 +1,7 @@
 ![alpha music](https://user-images.githubusercontent.com/63960808/175769498-6cf516c2-5655-4207-b564-646813052cc6.png)
 
 
-# AlphaMusic
+---
 Music generator AI model
 
 
