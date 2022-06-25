@@ -2,7 +2,7 @@
 
 
 ---
-Music generator AI model
+## Music generator AI model
 
 
 Sick of the buzz of a polluted world? Need a moment of zen? The perfect remedy is right here!
