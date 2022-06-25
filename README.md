@@ -1,4 +1,4 @@
-![alphamusic](https://user-images.githubusercontent.com/63960808/168470163-38cb2d4c-9ab9-471f-9ed0-1a86d9bc4e2d.jpg)
+![alpha music](https://user-images.githubusercontent.com/63960808/175769498-6cf516c2-5655-4207-b564-646813052cc6.png)
 
 
 # AlphaMusic
