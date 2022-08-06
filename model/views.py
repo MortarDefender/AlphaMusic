@@ -1,3 +1,6 @@
+from model.forms import CreateSongs
 from django.shortcuts import render
 
-# Create your views here.
+
+def generate_page(request):
+    return render(request, 'generate/generate_page.html', {'generate_form': CreateSongs})
