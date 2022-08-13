@@ -549,5 +549,9 @@ input[type=submit] {
 
 #id_music_model, #id_instrument, #id_background_music, #id_song_length, #id_number_of_songs {
     color: black;
+    background-color: #fff;
+    border: none;
+    padding: 0.9rem 0.9rem;
+    margin: 0.5rem 0;
+    width: 65%;
 }
-

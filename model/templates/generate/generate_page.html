@@ -61,11 +61,11 @@
 		</div>
 
 
-        <div class="bgimg-2">
-		  <div class="caption">
-			<span class="display-2" id="wallpaperCaption" style="color: #f7f7f7; letter-spacing: 10px; padding: 5%;">Generate Songs</span>
-		  </div>
-		</div>
+      <div class="bgimg-2">
+        <div class="caption">
+        <span class="display-2" id="wallpaperCaption" style="color: #f7f7f7; letter-spacing: 10px; padding: 5%;">Generate Songs</span>
+        </div>
+      </div>
         
         <div class="container-auto">
           <div class="row">
@@ -73,8 +73,16 @@
                 <h1 class="display-10 text-box">
                     <form method="POST" id="form" class="form">
                         {% csrf_token %}
-                    
-                        {{ generate_form.as_p }}
+
+                        <table style="width: 100%;">
+                          {% for field in generate_form %}
+                          <tr>
+                            <td style="text-align: left; color: white;"><label style=" font-weight: bold;">{{field.name}}</label></td>
+                            <td style="width: 70%;">{{ field }}</td>
+                          </tr>
+                          {% endfor %}
+                        </table>
+                        <br><br>
 
                         <input type="submit" class="button" name="submit" value="Create" style="background-color: black;" />
                     </form>
@@ -83,6 +91,55 @@
           </div>
         </div>
         
+        {% if results %}
+          <div class="bgimg-2">
+            <div class="caption">
+              <span class="display-2" id="wallpaperCaption" style="color: #f7f7f7; letter-spacing: 10px; padding: 5%;">Songs Created</span>
+            </div>
+          </div>
+
+          <div class="container-auto">
+            <div class="row">
+              <div class="col textBox" id="generate_songs">
+                  <h1 class="display-10 text-box">
+                    <table style="margin-left: 3%; width: 95%;">
+                      <tr>
+                        <td>
+                          <h3 style="color: black;">Hunting Grounds</h3>
+                          <audio controls>
+                            {% load static %}
+                            <source src="{% static 'files/maestro/piano/rain/Hunting.mp3' %}" type="audio/mpeg">
+                          </audio>
+                        </td>
+                        <td>
+                          <h3 style="color: black;">Hunting Grounds</h3>
+                          <audio controls>
+                            {% load static %}
+                            <source src="{% static 'files/maestro/piano/rain/Hunting.mp3' %}" type="audio/mpeg">
+                          </audio>
+                        </td>
+                        <td>
+                          <h3 style="color: black;">Hunting Grounds</h3>
+                          <audio controls>
+                            {% load static %}
+                            <source src="{% static 'files/maestro/piano/rain/Hunting2.mp3' %}" type="audio/mpeg">
+                          </audio>
+                        </td>
+                        <td>
+                          <h3 style="color: black;">Hunting Grounds</h3>
+                          <audio controls>
+                            {% load static %}
+                            <source src="{% static 'files/maestro/piano/rain/Hunting2.mp3' %}" type="audio/mpeg">
+                          </audio>
+                        </td>
+                      </tr>
+                    </table>
+                  </h1>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
         <div class="bgimg-3">
           <div class="caption">
             <span class="display-2" id="wallpaperCaption" style="color: #f7f7f7; letter-spacing: 10px; padding: 5%;">stream demo</span>
@@ -92,7 +149,6 @@
         <div class="container-auto">
           <div class="row">
             <div class="col textBox">
-                
                 <h1 class="display-4 text-box">
                     <iframe width="1140" height="720" src="https://www.youtube.com/embed/KmMO_1iZ7wY" title="Roi Flint Live Stream" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </h1>
