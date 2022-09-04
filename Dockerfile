@@ -5,7 +5,11 @@ WORKDIR /app
 
 COPY requirments.txt requirments.txt
 
+COPY . .
+
 RUN pip install -r requirments.txt
+
+RUN apt update -y && apt install timidity -y
 
 EXPOSE 8000
 

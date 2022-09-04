@@ -3,4 +3,4 @@ numpy
 music21
 tensorflow
 keras
-mido
+pydub
