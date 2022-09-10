@@ -1,7 +1,6 @@
 import os
 import numpy
 import pickle
-from datetime import datetime
 from keras.utils import np_utils
 from keras.models import Sequential
 from music21 import instrument, note, chord, stream
@@ -14,15 +13,15 @@ def get_model_location(model_name):
 
     if model_name == "anime":
         result += "Anime"
-    elif model_name == "bethoven":
-        result += "Bethoven"
+    elif model_name == "beethoven":
+        result += "Beethoven"
     elif model_name == "lofi":
         result += "Lofi"
     elif model_name == "maestro":
         result += "Maestro_2017"
-    elif model_name == "maestro 2017":
+    elif model_name == "maestro_2017":
         result += "Maestro_2017"
-    elif model_name == "maestro 2018":
+    elif model_name == "maestro_2018":
         result += "Maestro_2018"
     elif model_name == "mozart":
         result += "Mozart"
@@ -45,6 +44,7 @@ class AlphaGenerate():
     def __init__(self, number_of_notes = 128, model_name="anime", instrument_name="piano", file_name="Model") -> None:
         self.notes = None
         self.sequence_length = 32
+        self.base_number_of_notes = 128
         self.input_notes_file_name = "notes"
         self.output_directory_name = "model//class_engine//output"
         self.number_of_notes = number_of_notes
@@ -52,21 +52,24 @@ class AlphaGenerate():
         self.instrument = get_instrument(instrument_name)
         self.data_directory_name = get_model_location(model_name)
 
+        self.notes = self.get_notes()
+        self.model = self.load_model()
+
         self.file_name = file_name
 
-    def create(self, songs_amount = 1):
+    def create(self, songs_amount = 1, number_of_notes = 128, instrument_name="piano", file_name="Model"):
+        self.file_name = file_name
+        self.number_of_notes = number_of_notes
+        self.instrument = get_instrument(instrument_name)
+
         songs_created = list()
-        self.notes = self.get_notes()
-        pitch_names = sorted(set(item for item in self.notes))  # is the for needed
+        pitch_names = sorted(set(item for item in self.notes))
         network_input, normalized_input = self.prepare_sequences(pitch_names)
-        model = self.load_model()
 
         for index in range(songs_amount):
-            # current_time = datetime.now()
-            # file_name = f'{current_time.strftime("%Y-%m-%d %H:%M:%S")}||{index}'
             file_name = f'{self.file_name}-No-{index}'
             songs_created.append((self.get_files_location(file_name), file_name))
-            prediction_output = self.generate_notes(model, network_input, pitch_names, len(set(self.notes)), self.number_of_notes)
+            prediction_output = self.generate_notes(network_input, pitch_names, len(set(self.notes)), self.number_of_notes)
             self.create_midi(prediction_output, file_name)
 
         return songs_created
@@ -77,7 +80,6 @@ class AlphaGenerate():
         return f"/files/{music_model}/{instrument}/{background_music}/{file_name}"
 
     def get_notes(self):
-        print(os.getcwd())
         with open(f'{self.data_directory_name}//{self.input_notes_file_name}', 'rb') as filepath:
             return pickle.load(filepath)
 
@@ -88,7 +90,7 @@ class AlphaGenerate():
         for index in range(len(self.notes) - self.sequence_length):
             sequence_in = self.notes[index: index + self.sequence_length]
             sequence_out = self.notes[index + self.sequence_length]
-            output.append([note_to_int[sequence_out]])  # is output is needed
+            output.append([note_to_int[sequence_out]])
             network_input.append([note_to_int[note_character] for note_character in sequence_in])
         
         normalized_input = numpy.reshape(network_input, (len(network_input), self.sequence_length, 1))
@@ -99,7 +101,7 @@ class AlphaGenerate():
     def load_model(self):
         return pickle.load(open(f"{self.data_directory_name}//{self.model_pickle_file_name}", 'rb'))
 
-    def generate_notes(self, model, network_input, pitch_names, vocals_number, notes_number):
+    def generate_notes(self, network_input, pitch_names, vocals_number, notes_number):
         prediction_output = list()
         int_to_note = dict((number, note) for number, note in enumerate(pitch_names))
         
@@ -109,7 +111,7 @@ class AlphaGenerate():
         for _ in range(notes_number):
             prediction_input = numpy.reshape(pattern, (1, len(pattern), 1))
             prediction_input = prediction_input / float(vocals_number)
-            prediction = model.predict(prediction_input, verbose=0)
+            prediction = self.model.predict(prediction_input, verbose=0)
 
             index = numpy.argmax(prediction)
             result = int_to_note[index]

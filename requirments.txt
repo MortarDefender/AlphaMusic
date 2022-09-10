@@ -3,4 +3,6 @@ numpy
 music21
 tensorflow
 keras
+ffmpeg
 pydub
+python-telegram-bot==10.0.2

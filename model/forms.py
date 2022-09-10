@@ -10,7 +10,8 @@ class Instruments(models.TextChoices):
 
 
 class MusicModels(models.TextChoices):
-    MAESTRO = "maestro", "maestro"
+    MAESTRO7 = "maestro_2017", "maestro_2017"
+    MAESTRO8 = "maestro_2018", "maestro_2018"
     MOZART = "mozart", "mozart" 
     ANIME = "anime", "anime"
     BACH = "bach", "bach"
@@ -18,9 +19,9 @@ class MusicModels(models.TextChoices):
 
 
 class BackgroundMusic(models.TextChoices):
-    RAIN = "Rain", "Rain"
-    STORM = "Storm", "Storm"
-    THUNDER = "Thunder", "Thunder"
+    RAIN = "rain", "rain"
+    STORM = "storm", "storm"
+    THUNDER = "thunder", "thunder"
 
 
 class CreateSongs(ModelForm):

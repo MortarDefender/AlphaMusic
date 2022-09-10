@@ -19,31 +19,31 @@ class Instruments(models.TextChoices):
 
 
 class MusicModels(models.TextChoices):
-    MAESTRO = "maestro", "maestro"
-    MOZART = "mozart", "mozart" 
     ANIME = "anime", "anime"
-    BACH = "bach", "bach"
+    MAESTRO7 = "maestro_2017", "maestro_2017"
+    MAESTRO8 = "maestro_2018", "maestro_2018"
+    BACH = "beethoven", "beethoven"
+    MOZART = "mozart", "mozart" 
     LOFI = "lofi", "lofi"
 
 
 class SongFile(models.Model):
     number_of_songs = models.IntegerField()
     song_length = models.FloatField()
-    # get a music file from the user
     background_music = models.CharField(
-        max_length=7,
+        max_length=20,
         choices=BackgroundMusic.choices,
         default=BackgroundMusic.RAIN,
     )
     instrument = models.CharField(
-        max_length=7,
+        max_length=20,
         choices=Instruments.choices,
         default=Instruments.PIANO,
     )
     music_model = models.CharField(
-        max_length=7,
+        max_length=20,
         choices=MusicModels.choices,
-        default=MusicModels.MAESTRO,
+        default=MusicModels.ANIME,
     )
     generated_file = models.FileField(upload_to=upload_to_function)
 

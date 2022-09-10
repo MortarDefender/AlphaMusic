@@ -13,7 +13,7 @@ function overlay() {
         if(counter == 101) {
             clearInterval(i);
         }
-      }, 110);
+      }, 330);
     });
 };
 
