@@ -9,8 +9,10 @@ COPY . .
 
 RUN pip install -r requirments.txt
 
-RUN apt update -y && apt install timidity -y
+RUN apt update -y && apt install timidity -y && apt install ffmpeg -y
 
 EXPOSE 8000
+EXPOSE 8080
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "alpha_music_bot.py"]
