@@ -45,6 +45,8 @@ class AlphaMusicBot():
             'help': self.help,
 
             'generate': self.generate,
+            'soundcloud': self.get_soundcloud,
+            'youtube': self.get_youtube,
         }
 
         for function_name, function in handlers_func.items():
@@ -94,6 +96,24 @@ class AlphaMusicBot():
                         "instrument: piano, guitar\t\n"
                         "background music: rain, storm, thunder"
             )
+
+    @staticmethod
+    def get_soundcloud(bot, update, args):
+        bot.send_chat_action(chat_id=update.message.chat_id, action=CA.TYPING)
+        sleep(1)
+        bot.send_message(
+            chat_id=update.message.chat_id,
+            text="https://soundcloud.com/alpha-music-416482025"
+        )
+    
+    @staticmethod
+    def get_youtube(bot, update, args):
+        bot.send_chat_action(chat_id=update.message.chat_id, action=CA.TYPING)
+        sleep(1)
+        bot.send_message(
+            chat_id=update.message.chat_id,
+            text="https://www.youtube.com/channel/UCOsZtY6Wl13tZB_Zie_W0Fg/featured"
+        )
 
     @staticmethod
     def default_function(bot, update):
