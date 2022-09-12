@@ -8,9 +8,9 @@ class ModelConfig(AppConfig):
 
     generator = {
         "lofi": None,
-        "bach": None,
         "anime": None,
         "mozart": None,
+        "beethoven": None,
         "maestro_2017": None,
         "maestro_2018": None,
     }
