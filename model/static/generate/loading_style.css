@@ -1,0 +1,54 @@
+.loading-page {
+  background: #0d0d0d;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-page .counter {
+  text-align: center;
+}
+.loading-page .counter p {
+  font-size: 40px;
+  font-weight: 100;
+  color: #f60d54;
+}
+.loading-page .counter h1 {
+  color: white;
+  font-size: 60px;
+  margin-top: 2px;
+}
+.loading-page .counter hr {
+  background: #f60d54;
+  border: none;
+  height: 1px;
+  margin-top: 65px;
+}
+.loading-page .counter {
+  position: relative;
+  width: 200px;
+}
+.loading-page .counter h1.abs {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.loading-page .counter .color {
+  width: 0px;
+  overflow: hidden;
+  color: #f60d54;
+}
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
